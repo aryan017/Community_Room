@@ -1,6 +1,12 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {useForm,SubmitHandler} from "react-hook-form";
+import { PEOPLES_IMAGES } from "../../image";
+import Cookies from "universal-cookie";
+import { StreamVideoClient, User } from "@stream-io/video-react-sdk";
+import { useUser } from "../../context/user-context";
+import { useNavigate } from "react-router-dom";
+import "./../../App.css"
 
 interface FormValues{
     username : string;
@@ -9,7 +15,9 @@ interface FormValues{
 
 
 export const SignIn=() => {
-
+    const {setClient,setUser}=useUser();
+    const cookies=new Cookies();
+    const navigate=useNavigate();
 
     const schema=yup.object().shape({
         username : yup.string().matches(/^[a-zA-Z0-9_.@$]+$/,"Invalid User").required("Username is Required"),
@@ -19,10 +27,55 @@ export const SignIn=() => {
 
     const {register,handleSubmit,formState:{errors}} = useForm<FormValues>({resolver:yupResolver(schema)});
 
-    const onsubmit : SubmitHandler<FormValues>=(data,event) => {
+    const onsubmit : SubmitHandler<FormValues>= async (data,event) => {
         event?.preventDefault();
         const {username,name}=data;
-        console.log(username,name)
+        const response= await fetch("http://localhost:3002/auth/createUser",{
+            method : "POST",
+            headers : {
+                "content-type" : "application/json",
+            },
+            body : JSON.stringify({
+                username, 
+                name,
+                image : PEOPLES_IMAGES[Math.floor(Math.random()*PEOPLES_IMAGES.length)]
+            }) 
+        })
+
+        if(!response.ok){
+            alert("Something went Wrong");
+            return ;
+        }
+
+        const responseData=await response.json();
+
+        console.log(responseData);
+
+        const user : User={
+            id : username,
+            name
+        }
+
+        const myclient=new StreamVideoClient({
+            apiKey : "q7gsrrvhj5nz",
+            user,
+            token : responseData.token,
+        });
+
+        
+
+        const expires=new Date();
+        expires.setDate(expires.getDate()+1);
+        cookies.set("token",responseData.token,{expires});
+        cookies.set("username",responseData.username,{expires});
+        cookies.set("name",responseData.name,{expires});
+
+        setClient(myclient)
+        setUser({username,name});
+
+        navigate("/")
+    
+
     }
 
    return (

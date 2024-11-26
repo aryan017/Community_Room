@@ -6,4 +6,4 @@ dotenv.config();
 const ApiKey=process.env.KEY;
 const ApiSecret=process.env.SECRET;
 
-export const client=new StreamClient(String(ApiKey),String(ApiSecret));
+export const client = new StreamClient(String(ApiKey), String(ApiSecret), { timeout: 10000 });

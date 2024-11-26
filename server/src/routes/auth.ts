@@ -21,6 +21,10 @@ router.post("/createUser", async (req : Request, res : Response) => {
         [newUser.id] : newUser,
     }
    })
+   const iat=Math.floor(Date.now()/1000);
+   const expiry=iat+24*60*60;
+   const token=client.createToken(username,expiry);
+   return res.status(200).json({token,username,name})
 })
 
 export default router;
