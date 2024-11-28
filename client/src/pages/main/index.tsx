@@ -1,4 +1,4 @@
-import { StreamVideo } from "@stream-io/video-react-sdk"
+import { Call, StreamVideo } from "@stream-io/video-react-sdk"
 import { useUser } from "../../context/user-context";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -124,6 +124,18 @@ export const MainPage=() => {
         }
     }
 
+    const joinCall=async (callId : string) => {
+         const call=client?.call("audio_room",callId)
+
+         try{
+           await call?.join()
+           setCall(call)
+           navigate("/room")
+         }catch(error){
+            alert("Error while Joining the Call, Wait for room to be LIVE")
+         }
+    }
+
     if(isLoadingClient) return <h1>...</h1>;
      
     if(!isLoadingClient && !user || !isLoadingClient && !client) {
@@ -151,7 +163,7 @@ export const MainPage=() => {
         <h2>Available Rooms</h2> 
         <div className="grid">{availableRooms.map(
             (room) =>
-             (<div className="card" key={room.id}>
+             (<div className="card" key={room.id} onClick={() => joinCall(room.id)}>
                 <h4>{room.title}</h4>
                 <p>{room.description}</p>
                 <p>Number Of Participants : {room.participantsLength}</p>
