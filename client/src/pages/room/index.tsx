@@ -1,6 +1,7 @@
 import { OwnCapability, PermissionRequests, useCallStateHooks, useRequestPermission } from "@stream-io/video-react-sdk";
 import {Controls} from "./controls";
 import { useUser } from "../../context/user-context";
+import { Participants } from "./participants";
 
 export const Room=() => {
     const {useParticipants,useCallCustomData,useCallCreatedBy}=useCallStateHooks();

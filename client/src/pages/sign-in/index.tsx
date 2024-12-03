@@ -81,19 +81,112 @@ export const SignIn=() => {
    return (
     <div className="sign-in">
         <h1>Welcome to Community Room</h1>
-       <form onSubmit={handleSubmit(onsubmit)}>
-        <div>
-            <label>Username :</label>
-            <input type="text"  {...register("username")}/>
-            {errors.username && (<p style={{color:"red"}}>{errors.username.message}</p>)}
-        </div>
-        <div>
-            <label>Name :</label>
-            <input type="text" {...register("name")}/>
-            {errors.name && (<p style={{color:"red"}}>{errors.name.message}</p>)}
-        </div>
-        <button type="submit"> Sign In </button>
-       </form>
+        <form 
+  onSubmit={handleSubmit(onsubmit)} 
+  style={{
+    maxWidth: "400px",
+    margin: "50px auto",
+    padding: "20px",
+    borderRadius: "10px",
+    background: "linear-gradient(135deg, #1e1e2f 40%, #28293d)",
+    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
+    fontFamily: "'Inter', sans-serif",
+    color: "#f5f5f5"
+  }}
+>
+  <div style={{ marginBottom: "20px" }}>
+    <label 
+      style={{
+        display: "block",
+        marginBottom: "8px",
+        fontWeight: "600",
+        fontSize: "1rem",
+        color: "#a0a0ff"
+      }}
+    >
+      Username:
+    </label>
+    <input
+      type="text"
+      {...register("username")}
+      style={{
+        width: "100%",
+        padding: "10px",
+        borderRadius: "5px",
+        border: "1px solid #646cff",
+        background: "#23253c",
+        color: "#f5f5f5",
+        fontSize: "1rem",
+        outline: "none",
+        transition: "border 0.3s ease"
+      }}
+      onFocus={(e) => (e.target.style.border = "1px solid #535bf2")}
+      onBlur={(e) => (e.target.style.border = "1px solid #646cff")}
+    />
+    {errors.username && (
+      <p style={{ color: "#ff6b6b", fontSize: "0.9rem", marginTop: "8px" }}>
+        {errors.username.message}
+      </p>
+    )}
+  </div>
+  
+  <div style={{ marginBottom: "20px" }}>
+    <label 
+      style={{
+        display: "block",
+        marginBottom: "8px",
+        fontWeight: "600",
+        fontSize: "1rem",
+        color: "#a0a0ff"
+      }}
+    >
+      Name:
+    </label>
+    <input
+      type="text"
+      {...register("name")}
+      style={{
+        width: "100%",
+        padding: "10px",
+        borderRadius: "5px",
+        border: "1px solid #646cff",
+        background: "#23253c",
+        color: "#f5f5f5",
+        fontSize: "1rem",
+        outline: "none",
+        transition: "border 0.3s ease"
+      }}
+      onFocus={(e) => (e.target.style.border = "1px solid #535bf2")}
+      onBlur={(e) => (e.target.style.border = "1px solid #646cff")}
+    />
+    {errors.name && (
+      <p style={{ color: "#ff6b6b", fontSize: "0.9rem", marginTop: "8px" }}>
+        {errors.name.message}
+      </p>
+    )}
+  </div>
+  
+  <button
+    type="submit"
+    style={{
+      width: "100%",
+      padding: "12px",
+      borderRadius: "8px",
+      border: "none",
+      background: "linear-gradient(90deg, #646cff, #535bf2)",
+      color: "#ffffff",
+      fontWeight: "600",
+      fontSize: "1rem",
+      cursor: "pointer",
+      boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)",
+      transition: "all 0.3s ease"
+    }}
+    onMouseOver={(e) => (e.target.style.transform = "scale(1.05)")}
+    onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
+  >
+    Sign In
+  </button>
+</form>
     </div>
    )
 };

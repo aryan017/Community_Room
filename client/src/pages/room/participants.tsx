@@ -1,4 +1,5 @@
 import { ParticipantsAudio, useCallStateHooks } from "@stream-io/video-react-sdk"
+import { Participant } from "./Participant";
 
 export const Participants=() => {
     const {useParticipants}=useCallStateHooks();
