@@ -18,11 +18,6 @@ interface Room{
     createdBy : string
 }
 
-type customData = {
-    title? : string;
-    description? : string;
-}
-
 export const MainPage=() => {
     const {client,user,setCall,isLoadingClient}=useUser();
 
