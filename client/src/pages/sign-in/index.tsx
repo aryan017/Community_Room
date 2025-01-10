@@ -120,8 +120,8 @@ export const SignIn=() => {
         outline: "none",
         transition: "border 0.3s ease"
       }}
-      onFocus={(e) => (e.target.style.border = "1px solid #535bf2")}
-      onBlur={(e) => (e.target.style.border = "1px solid #646cff")}
+      onFocus={(e) => ((e.target as HTMLButtonElement).style.border = "1px solid #535bf2")}
+      onBlur={(e) => ((e.target as HTMLButtonElement).style.border = "1px solid #646cff")}
     />
     {errors.username && (
       <p style={{ color: "#ff6b6b", fontSize: "0.9rem", marginTop: "8px" }}>
@@ -181,8 +181,8 @@ export const SignIn=() => {
       boxShadow: "0 4px 6px rgba(0, 0, 0, 0.3)",
       transition: "all 0.3s ease"
     }}
-    onMouseOver={(e) => (e.target.style.transform = "scale(1.05)")}
-    onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
+    onMouseOver={(e) => ((e.target as HTMLButtonElement).style.transform = "scale(1.05)")}
+    onMouseOut={(e) => ((e.target as HTMLButtonElement).style.transform = "scale(1)")}
   >
     Sign In
   </button>
