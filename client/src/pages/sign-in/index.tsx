@@ -156,8 +156,8 @@ export const SignIn=() => {
         outline: "none",
         transition: "border 0.3s ease"
       }}
-      onFocus={(e) => (e.target.style.border = "1px solid #535bf2")}
-      onBlur={(e) => (e.target.style.border = "1px solid #646cff")}
+      onFocus={(e) => ((e.target as HTMLButtonElement).style.border = "1px solid #535bf2")}
+      onBlur={(e) => ((e.target as HTMLButtonElement).style.border = "1px solid #646cff")}
     />
     {errors.name && (
       <p style={{ color: "#ff6b6b", fontSize: "0.9rem", marginTop: "8px" }}>

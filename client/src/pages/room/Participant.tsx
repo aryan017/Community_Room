@@ -1,4 +1,4 @@
-import { Avatar,StreamVideoClient, StreamVideoParticipant } from "@stream-io/video-react-sdk"
+import { Avatar, StreamVideoParticipant } from "@stream-io/video-react-sdk"
 
 
 interface Props {

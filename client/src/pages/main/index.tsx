@@ -102,7 +102,7 @@ export const MainPage=() => {
             const getCallInfo=async (call : Call) : Promise<Room> => {
                 const callInfo=await call.get();
                 const customData=callInfo.call.custom;
-                const {title,description} =(customData || {}) as CustomCallData;
+                const {title,description} =(customData || {});
                 const participantsLength=callInfo.members.length ?? 0;
                 const createdBy=callInfo.call.created_by.name ?? "";
                 const id=callInfo.call.id ?? "";
